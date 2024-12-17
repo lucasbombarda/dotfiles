@@ -1,6 +1,5 @@
 #!/bin/env bash
 
-
 if [ -z "$1" ]; then
     echo "Usage: $0 <project_name>"
     exit 1

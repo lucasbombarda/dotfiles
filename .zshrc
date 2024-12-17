@@ -106,13 +106,16 @@ alias cam="scrcpy --video-source=camera --no-audio --no-video-playback --v4l2-si
 # alias to open my webcam in scrcpy with video playback
 alias camv="scrcpy --video-source=camera --no-audio --v4l2-sink=/dev/video0 --camera-{id=0,ar=16:9,fps=30} -m1920"
 
-# alias to update all my packages
-alias update="$HOME/dev/scripts/update_all.sh"
-
 # alias to copy the output to the clipboard using xclip
 alias clip="xclip -selection clipboard"
 
+# alias to open android studio
 alias android-studio="sudo /usr/local/android-studio/bin/studio.sh"
+
+# alias to update all packages
+alias update="$HOME/scripts/update_all.sh"
+
+# end of aliases
 
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
