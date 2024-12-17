@@ -107,7 +107,7 @@ alias cam="scrcpy --video-source=camera --no-audio --no-video-playback --v4l2-si
 alias camv="scrcpy --video-source=camera --no-audio --v4l2-sink=/dev/video0 --camera-{id=0,ar=16:9,fps=30} -m1920"
 
 # alias to update all my packages
-alias update="sudo /home/z/dev/scripts/update_all.sh"
+alias update="$HOME/dev/scripts/update_all.sh"
 
 # alias to copy the output to the clipboard using xclip
 alias clip="xclip -selection clipboard"
@@ -115,7 +115,7 @@ alias clip="xclip -selection clipboard"
 alias android-studio="sudo /usr/local/android-studio/bin/studio.sh"
 
 # bun completions
-[ -s "/home/z/.bun/_bun" ] && source "/home/z/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -137,10 +137,10 @@ eval "$(zoxide init --cmd cd zsh)"
 eval $(thefuck --alias)
 
 # Load Nim
-export PATH=/home/z/.nimble/bin:$PATH
+export PATH="$HOME/.nimble/bin:$PATH"
 
 # opam configuration
-[[ ! -r /home/z/.opam/opam-init/init.zsh ]] || source /home/z/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+[[ ! -r "&HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null
 
 # Go compiler
 export PATH=$PATH:/usr/local/go/bin
