@@ -1,14 +1,6 @@
 return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    opts = function(_, opts)
-        vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
-            pattern = { "*.component.html", "*.component.ts" },
-            callback = function()
-                vim.treesitter.start(nil, "angular")
-            end,
-        })
-    end,
     config = function()
         require("nvim-treesitter.configs").setup({
             -- A list of parser names, or "all"
