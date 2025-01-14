@@ -35,24 +35,6 @@ sudo apt autoremove -y
 echo "Installing flatpak"
 sudo apt install -y flatpak
 
-######################################
-# 5. Install zsh, oh-my-zsh, and plugins
-######################################
-echo "Installing zsh, oh-my-zsh, and plugins"
-sudo apt install -y zsh
-sudo sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# Spaceship theme
-git clone https://github.com/spaceship-prompt/spaceship-prompt.git \
-    "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
-sudo ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" \
-    "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
-
-# ZSH plugins
-git clone https://github.com/zsh-users/zsh-autosuggestions \
-    "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
-    "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
 
 ######################################
 # 6. Install Stow
@@ -168,6 +150,25 @@ export PATH="$PATH:/usr/local/go/bin"
 
 # Move the downloaded archive to temp instead of deleting
 mv "${go_version}.linux-amd64.tar.gz" "$TEMP_DIR" 2>/dev/null || true
+
+######################################
+# 5. Install zsh, oh-my-zsh, and plugins
+######################################
+echo "Installing zsh, oh-my-zsh, and plugins"
+sudo apt install -y zsh
+sudo sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Spaceship theme
+git clone https://github.com/spaceship-prompt/spaceship-prompt.git \
+    "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
+    sudo ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" \
+        "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+
+# ZSH plugins
+git clone https://github.com/zsh-users/zsh-autosuggestions \
+    "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+    "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
 
 ######################################
 # 13. Cleanup (final)
