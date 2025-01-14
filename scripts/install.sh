@@ -83,9 +83,5 @@ sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf $go_version.linux-amd64
 export PATH=$PATH:/usr/local/go/bin
 rm $go_version.linux-amd64.tar.gz
 
-# Running Stow
-echo "Running Stow"
-cd dotfiles
-stow .
-
-
+echo -e "\n\n\n------------------ COMPLETE ------------------"
+echo "Ready to run Stow, you can now run \"stow .\" inside the dotfiles directory to symlink the dotfiles"
