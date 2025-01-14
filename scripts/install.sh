@@ -10,7 +10,7 @@ echo "All to-be-deleted files will be moved here first."
 # 1. Update system packages
 ######################################
 echo "Updating all installed packages and distro"
-sudo apt update -y
+sudo apt update
 sudo apt upgrade -y
 sudo apt dist-upgrade -y
 
@@ -105,7 +105,6 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 nvm install --lts
-nvm use --lts
 npm install -g @angular/cli
 
 ######################################
@@ -118,8 +117,8 @@ curl -fsSL https://bun.sh/install | bash
 # 12d. Python 3.11 with deadsnakes
 ######################################
 echo "Installing Python 3.11 with deadsnakes"
-sudo add-apt-repository ppa:deadsnakes/ppa -y
-sudo apt update -y
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
 sudo apt install -y python3.11 python3.11-dev python3.11-venv
 
 ######################################
