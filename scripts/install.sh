@@ -77,6 +77,7 @@ chmod u+x nvim.appimage
 sudo mv squashfs-root / && sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
 
 # Move old files to $TEMP_DIR instead of deleting them immediately:
+sudo mv squashfs-root "$TEMP_DIR" 2>/dev/null || true
 sudo mv nvim.appimage "$TEMP_DIR" 2>/dev/null || true
 sudo mv /usr/bin/vim "$TEMP_DIR" 2>/dev/null || true
 
@@ -130,8 +131,8 @@ make linux test
 cd ..
 
 # Move the source and archive to temp instead of deleting
-mv lua-5.1.5.tar.gz "$TEMP_DIR" 2>/dev/null || true
-rm -rf lua-5.1.5
+sudo mv lua-5.1.5.tar.gz "$TEMP_DIR" 2>/dev/null || true
+sudo mv lua-5.1.5 "$TEMP_DIR" 2>/dev/null || true
 
 ######################################
 # 12f. Go
@@ -146,19 +147,19 @@ sudo tar -C /usr/local -xzf "${go_version}.linux-amd64.tar.gz"
 export PATH="$PATH:/usr/local/go/bin"
 
 # Move the downloaded archive to temp instead of deleting
-mv "${go_version}.linux-amd64.tar.gz" "$TEMP_DIR" 2>/dev/null || true
+sudo mv "${go_version}.linux-amd64.tar.gz" "$TEMP_DIR" 2>/dev/null || true
 
 ######################################
 # 5. Install zsh, oh-my-zsh, and plugins
 ######################################
 echo "Installing zsh, oh-my-zsh, and plugins"
 sudo apt install -y zsh
-sudo sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Spaceship theme
 git clone https://github.com/spaceship-prompt/spaceship-prompt.git \
     "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
-    sudo ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" \
+sudo ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" \
         "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
 
 # ZSH plugins
@@ -176,4 +177,5 @@ echo "Ready to run 'stow .' inside the dotfiles directory to symlink the dotfile
 echo "Now removing the temporary directory and its contents:"
 sudo rm -rf "$TEMP_DIR"
 echo "Temporary directory removed."
+chsh -s /bin/zsh
 
