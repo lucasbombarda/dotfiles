@@ -26,7 +26,7 @@ sudo apt install zsh -y
 chsh -s /bin/zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
-ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+sudo ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
@@ -46,6 +46,10 @@ sudo apt install ripgrep -y
 echo "Installing thefuck"
 sudo apt install thefuck -y
 
+# Install zoxide
+echo "Installing zoxide"
+curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+
 # Install NeoVim
 echo "Installing NeoVim"
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
@@ -64,9 +68,10 @@ sudo apt install gcc g++ -y
 echo "Installing Rust"
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-echo "Installing latest Node.js LTS with nvm"
+echo "Installing latest Node.js LTS with nvm and Angular CLI"
 wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-nvm install node --lts
+nvm install --lts
+node install -g @angular/cli
 
 echo "Installing Bun"
 curl -fsSL https://bun.sh/install | bash
