@@ -23,8 +23,7 @@ sudo apt install flatpak -y
 # Install zsh, oh-my-zsh, and plugins
 echo "Installing zsh, oh-my-zsh, and plugins"
 sudo apt install zsh -y
-chsh -s /bin/zsh
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sudo sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
 sudo ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -56,7 +55,7 @@ curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
 ./nvim.appimage --appimage-extract
 sudo mv squashfs-root / && sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
-rm nvim.appimage
+sudo rm nvim.appimage
 sudo rm -rf /usr/bin/vim
 sudo ln -s /usr/bin/nvim /usr/bin/vim
 
@@ -66,10 +65,10 @@ echo "Installing C/C++ (GCC)"
 sudo apt install gcc g++ -y
 
 echo "Installing Rust"
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+sudo curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 echo "Installing latest Node.js LTS with nvm and Angular CLI"
-wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+sudo wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 nvm install --lts
 nvm use --lts
 npm install -g @angular/cli
