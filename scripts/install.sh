@@ -116,9 +116,7 @@ curl -fsSL https://bun.sh/install | bash
 ######################################
 # 12d. Python 3.11 with deadsnakes
 ######################################
-echo "Installing Python 3.11 with deadsnakes"
-sudo add-apt-repository ppa:deadsnakes/ppa
-sudo apt update
+echo "Installing Python 3.11"
 sudo apt install -y python3.11 python3.11-dev python3.11-venv
 
 ######################################
