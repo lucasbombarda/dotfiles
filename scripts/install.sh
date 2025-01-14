@@ -71,7 +71,8 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 echo "Installing latest Node.js LTS with nvm and Angular CLI"
 wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 nvm install --lts
-node install -g @angular/cli
+nvm use --lts
+npm install -g @angular/cli
 
 echo "Installing Bun"
 curl -fsSL https://bun.sh/install | bash
@@ -79,7 +80,14 @@ curl -fsSL https://bun.sh/install | bash
 echo "Installing Python 3.11 with deadsnakes"
 sudo add-apt-repository ppa:deadsnakes/ppa -y
 sudo apt update -y
-sudo apt install python3.11 python3.11-dev python3.11-venv python3.11-full -y
+sudo apt install python3.11 python3.11-dev python3.11-venv -y
+
+echo "Installing Lua"
+curl -L -R -O https://www.lua.org/ftp/lua-5.1.5.tar.gz
+tar zxf lua-5.1.5.tar.gz
+cd lua-5.1.5
+make linux test
+rm -rf lua-5.1.5 lua-5.1.5.tar.gz
 
 echo "Installing Go"
 go_version=$(curl -s https://go.dev/VERSION?m=text | head -n 1)
