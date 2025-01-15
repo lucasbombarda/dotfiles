@@ -153,7 +153,7 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 # Spaceship theme
 git clone https://github.com/spaceship-prompt/spaceship-prompt.git \
     "${ZSH_CUSTOM:-$HOME}/themes/spaceship-prompt" --depth=1
-sudo ln -s "${ZSH_CUSTOM:-$HOME}/themes/spaceship-prompt/spaceship.zsh-theme" \
+ln -s "${ZSH_CUSTOM:-$HOME}/themes/spaceship-prompt/spaceship.zsh-theme" \
         "${ZSH_CUSTOM:-$HOME}/themes/spaceship.zsh-theme"
 
 # ZSH plugins
