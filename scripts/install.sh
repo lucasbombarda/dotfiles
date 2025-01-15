@@ -35,39 +35,38 @@ sudo apt autoremove -y
 echo "Installing flatpak"
 sudo apt install -y flatpak
 
-
 ######################################
-# 6. Install Stow
+# 5. Install Stow
 ######################################
 echo "Installing Stow"
 sudo apt install -y stow
 
 ######################################
-# 7. Install tmux
+# 6. Install tmux
 ######################################
 echo "Installing tmux"
 sudo apt install -y tmux
 
 ######################################
-# 8. Install ripgrep
+# 7. Install ripgrep
 ######################################
 echo "Installing ripgrep"
 sudo apt install -y ripgrep
 
 ######################################
-# 9. Install thefuck
+# 8. Install thefuck
 ######################################
 echo "Installing thefuck"
 sudo apt install -y thefuck
 
 ######################################
-# 10. Install zoxide
+# 9. Install zoxide
 ######################################
 echo "Installing zoxide"
 curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
 ######################################
-# 11. Install NeoVim
+# 10. Install NeoVim
 ######################################
 echo "Installing NeoVim"
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
@@ -76,32 +75,28 @@ chmod u+x nvim.appimage
 ./nvim.appimage --appimage-extract
 sudo mv squashfs-root / && sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
 
-# Move old files to $TEMP_DIR instead of deleting them immediately:
-sudo mv squashfs-root "$TEMP_DIR" 2>/dev/null || true
 sudo mv nvim.appimage "$TEMP_DIR" 2>/dev/null || true
 sudo mv /usr/bin/vim "$TEMP_DIR" 2>/dev/null || true
 
-# Replace vim with nvim symlink
 sudo ln -s /usr/bin/nvim /usr/bin/vim
 
 ######################################
-# 12. Install Compilers and Interpreters
+# 11. Install Compilers and Interpreters
 ######################################
 echo "Installing C/C++ (GCC)"
 sudo apt install -y gcc g++
 
 ######################################
-# 12a. Rust
+# 11a. Rust
 ######################################
 echo "Installing Rust"
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 ######################################
-# 12b. Node.js LTS + Angular CLI (via NVM)
+# 11b. Node.js LTS + Angular CLI (via NVM)
 ######################################
 echo "Installing latest Node.js LTS with nvm and Angular CLI"
 wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-# Activate NVM right away (might differ based on your shell)
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
@@ -109,51 +104,50 @@ nvm install --lts
 npm install -g @angular/cli
 
 ######################################
-# 12c. Bun
+# 11c. Bun
 ######################################
 echo "Installing Bun"
 curl -fsSL https://bun.sh/install | bash
 
 ######################################
-# 12d. Python 3.11 with deadsnakes
+# 11d. Python 3.11 with deadsnakes
 ######################################
 echo "Installing Python 3.11"
 sudo apt install -y python3.11 python3.11-dev python3.11-venv
 
 ######################################
-# 12e. Lua 5.1.5
+# 11e. Lua 5.1.5
 ######################################
 echo "Installing Lua 5.1.5"
 curl -L -R -O https://www.lua.org/ftp/lua-5.1.5.tar.gz
 tar zxf lua-5.1.5.tar.gz
 cd lua-5.1.5
-make linux test
+sudo make linux install
 cd ..
 
-# Move the source and archive to temp instead of deleting
 sudo mv lua-5.1.5.tar.gz "$TEMP_DIR" 2>/dev/null || true
 sudo mv lua-5.1.5 "$TEMP_DIR" 2>/dev/null || true
 
 ######################################
-# 12f. Go
+# 11f. Go
 ######################################
 echo "Installing Go"
 go_version="$(curl -s https://go.dev/VERSION?m=text | head -n 1)"
-wget "https://golang.org/dl/${go_version}.linux-amd64.tar.gz"
+wget "https://go.dev/dl/${go_version}.linux-amd64.tar.gz"
 
-# Remove old go in /usr/local and extract the new one
 sudo rm -rf /usr/local/go
 sudo tar -C /usr/local -xzf "${go_version}.linux-amd64.tar.gz"
 export PATH="$PATH:/usr/local/go/bin"
 
-# Move the downloaded archive to temp instead of deleting
 sudo mv "${go_version}.linux-amd64.tar.gz" "$TEMP_DIR" 2>/dev/null || true
 
 ######################################
-# 5. Install zsh, oh-my-zsh, and plugins
+# 12. Install zsh, oh-my-zsh, and plugins
 ######################################
 echo "Installing zsh, oh-my-zsh, and plugins"
 sudo apt install -y zsh
+chsh -s /bin/zsh
+
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Spaceship theme
@@ -177,4 +171,3 @@ echo "Ready to run 'stow .' inside the dotfiles directory to symlink the dotfile
 echo "Now removing the temporary directory and its contents:"
 sudo rm -rf "$TEMP_DIR"
 echo "Temporary directory removed."
-chsh -s /bin/zsh
