@@ -178,4 +178,3 @@ echo "Now removing the temporary directory and its contents:"
 sudo rm -rf "$TEMP_DIR"
 echo "Temporary directory removed."
 chsh -s /bin/zsh
-

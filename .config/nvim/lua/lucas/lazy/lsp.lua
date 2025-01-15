@@ -42,6 +42,7 @@ return {
                 "ts_ls",
                 "angularls",
                 "html",
+                "bashls",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
