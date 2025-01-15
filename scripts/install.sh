@@ -152,9 +152,9 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 
 # Spaceship theme
 git clone https://github.com/spaceship-prompt/spaceship-prompt.git \
-    "${ZSH_CUSTOM:-$HOME}/themes/spaceship-prompt" --depth=1
-ln -s "${ZSH_CUSTOM:-$HOME}/themes/spaceship-prompt/spaceship.zsh-theme" \
-        "${ZSH_CUSTOM:-$HOME}/themes/spaceship.zsh-theme"
+    "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/spaceship-prompt" --depth=1
+ln -s "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/spaceship-prompt/spaceship.zsh-theme" \
+        "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/spaceship.zsh-theme"
 
 # ZSH plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions \
@@ -165,9 +165,10 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
 ######################################
 # 13. Cleanup (final)
 ######################################
-echo -e "\n\n\n------------------ COMPLETE ------------------"
-echo "Ready to run 'stow .' inside the dotfiles directory to symlink the dotfiles."
-
 echo "Now removing the temporary directory and its contents:"
 sudo rm -rf "$TEMP_DIR"
 echo "Temporary directory removed."
+
+echo -e "\n\n\n------------------ COMPLETE ------------------"
+echo "Ready to run 'stow .' inside the dotfiles directory to symlink the dotfiles."
+
