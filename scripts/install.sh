@@ -64,6 +64,7 @@ sudo apt install -y thefuck
 ######################################
 echo "Installing zoxide"
 curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+sudo apt install fzf
 
 ######################################
 # 10. Install NeoVim
