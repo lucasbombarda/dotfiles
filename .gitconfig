@@ -1,0 +1,6 @@
+[user]
+    email = "lucas@devdock.com.br"
+    name = "Lucas Bombarda"
+[init]
+    defaultBranch = main
+
