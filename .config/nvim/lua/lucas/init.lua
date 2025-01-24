@@ -29,6 +29,14 @@ autocmd({ "BufWritePre" }, {
     command = [[%s/\s\+$//e]],
 })
 
+autocmd({ "BufRead", "BufNewFile" }, {
+    group = LucasGroup,
+    pattern = "*.component.html",
+    callback = function()
+        vim.bo.filetype = "htmlangular"
+    end,
+})
+
 autocmd('LspAttach', {
     group = LucasGroup,
     callback = function(e)
