@@ -37,6 +37,14 @@ autocmd({ "BufRead", "BufNewFile" }, {
     end,
 })
 
+autocmd({ "BufRead", "BufNewFile" }, {
+    group = LucasGroup,
+    pattern = "**/templates/**/*.html",
+    callback = function()
+        vim.bo.filetype = "htmldjango"
+    end,
+})
+
 autocmd('LspAttach', {
     group = LucasGroup,
     callback = function(e)
