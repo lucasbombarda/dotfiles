@@ -70,10 +70,10 @@ sudo apt install fzf
 # 10. Install NeoVim
 ######################################
 echo "Installing NeoVim"
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-chmod u+x nvim.appimage
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
+chmod u+x nvim-linux-x86_64.appimage
 
-./nvim.appimage --appimage-extract
+./nvim-linux-x86_64.appimage --appimage-extract
 sudo mv squashfs-root / && sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
 
 sudo mv nvim.appimage "$TEMP_DIR" 2>/dev/null || true
