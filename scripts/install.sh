@@ -76,7 +76,7 @@ chmod u+x nvim-linux-x86_64.appimage
 ./nvim-linux-x86_64.appimage --appimage-extract
 sudo mv squashfs-root / && sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
 
-sudo mv nvim.appimage "$TEMP_DIR" 2>/dev/null || true
+sudo mv nvim-linux-x86_64.appimage "$TEMP_DIR" 2>/dev/null || true
 sudo mv /usr/bin/vim "$TEMP_DIR" 2>/dev/null || true
 
 sudo ln -s /usr/bin/nvim /usr/bin/vim
@@ -92,17 +92,8 @@ sudo apt install -y gcc g++
 ######################################
 echo "Installing Rust"
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+echo "Activating cargo"
 
-######################################
-# 11b. Node.js LTS + Angular CLI (via NVM)
-######################################
-echo "Installing latest Node.js LTS with nvm and Angular CLI"
-wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
-nvm install --lts
-npm install -g @angular/cli
 
 ######################################
 # 11c. Bun
@@ -111,7 +102,7 @@ echo "Installing Bun"
 curl -fsSL https://bun.sh/install | bash
 
 ######################################
-# 11d. Python 3.11 with deadsnakes
+# 11d. Python 3.11
 ######################################
 echo "Installing Python 3.11"
 sudo apt install -y python3.11 python3.11-dev python3.11-venv
@@ -142,29 +133,8 @@ export PATH="$PATH:/usr/local/go/bin"
 
 sudo mv "${go_version}.linux-amd64.tar.gz" "$TEMP_DIR" 2>/dev/null || true
 
-######################################
-# 12. Install zsh, oh-my-zsh, and plugins
-######################################
-echo "Installing zsh, oh-my-zsh, and plugins"
-sudo apt install -y zsh
-chsh -s /bin/zsh
 
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# Spaceship theme
-git clone https://github.com/spaceship-prompt/spaceship-prompt.git \
-    "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/spaceship-prompt" --depth=1
-ln -s "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/spaceship-prompt/spaceship.zsh-theme" \
-        "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/spaceship.zsh-theme"
-
-# ZSH plugins
-git clone https://github.com/zsh-users/zsh-autosuggestions \
-    "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
-    "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
-
-# Remove the default .zshrc created by oh-my-zsh
-mv "$HOME/.zshrc" "$TEMP_DIR" 2>/dev/null || true
 
 ######################################
 # 13. Cleanup (final)
