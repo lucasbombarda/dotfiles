@@ -23,12 +23,14 @@ autocmd('TextYankPost', {
     end,
 })
 
+-- Automatically remove trailing whitespace on save
 autocmd({ "BufWritePre" }, {
     group = LucasGroup,
     pattern = "*",
     command = [[%s/\s\+$//e]],
 })
 
+-- Automatically set the Angular filetype for component files
 autocmd({ "BufRead", "BufNewFile" }, {
     group = LucasGroup,
     pattern = "*.component.html",
@@ -37,6 +39,7 @@ autocmd({ "BufRead", "BufNewFile" }, {
     end,
 })
 
+-- Automatically set the Django filetype for template files
 autocmd({ "BufRead", "BufNewFile" }, {
     group = LucasGroup,
     pattern = "**/templates/**/*.html",
@@ -44,6 +47,7 @@ autocmd({ "BufRead", "BufNewFile" }, {
         vim.bo.filetype = "htmldjango"
     end,
 })
+
 
 autocmd('LspAttach', {
     group = LucasGroup,

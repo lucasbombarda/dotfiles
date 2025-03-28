@@ -135,7 +135,6 @@ sudo mv "${go_version}.linux-amd64.tar.gz" "$TEMP_DIR" 2>/dev/null || true
 
 
 
-
 ######################################
 # 13. Cleanup (final)
 ######################################
