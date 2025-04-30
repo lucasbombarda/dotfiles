@@ -133,7 +133,28 @@ export PATH="$PATH:/usr/local/go/bin"
 
 sudo mv "${go_version}.linux-amd64.tar.gz" "$TEMP_DIR" 2>/dev/null || true
 
+######################################
+# 12. Install zsh, oh-my-zsh, and plugins
+######################################
+echo "Installing zsh, oh-my-zsh, and plugins"
+sudo apt install -y zsh
+chsh -s /bin/zsh
 
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Spaceship theme
+git clone https://github.com/spaceship-prompt/spaceship-prompt.git \
+    "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/spaceship-prompt" --depth=1
+ln -s "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/spaceship-prompt/spaceship.zsh-theme" \
+        "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/spaceship.zsh-theme"
+
+# ZSH plugins
+git clone https://github.com/zsh-users/zsh-autosuggestions \
+    "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+    "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
+
+mv "$HOME/.zshrc" "$TEMP_DIR" 2>/dev/null || true
 
 ######################################
 # 13. Cleanup (final)
