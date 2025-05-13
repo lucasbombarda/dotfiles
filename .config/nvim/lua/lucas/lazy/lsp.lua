@@ -29,7 +29,7 @@ return {
         require("fidget").setup({})
         require("mason").setup()
         require("mason-lspconfig").setup({
-            automatic_enable = false,
+            automatic_enable = {},
             ensure_installed = {
                 "lua_ls",
                 "rust_analyzer",
