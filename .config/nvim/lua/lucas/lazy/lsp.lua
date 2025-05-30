@@ -34,7 +34,6 @@ return {
                 "rust_analyzer",
                 "clangd",
                 "ruff",
-                "pyright",
                 "cssls",
                 "sqlls",
                 "biome",
@@ -82,23 +81,6 @@ return {
                                 },
                             }
 
-                        }
-                    }
-                end,
-
-                ["pyright"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.pyright.setup {
-                        capabilities = capabilities,
-                        settings = {
-                            python = {
-                                analysis = {
-                                    autoSearchPaths = true,
-                                    typeCheckingMode = "off",
-                                    diagnosticMode = "openFilesOnly",
-                                    useLibraryCodeForTypes = true,
-                                }
-                            }
                         }
                     }
                 end,
