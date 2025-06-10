@@ -24,9 +24,10 @@ return {
             "force",
             {},
             vim.lsp.protocol.make_client_capabilities(),
-            cmp_lsp.default_capabilities())
+            cmp_lsp.default_capabilities()
+        )
 
-        require("fidget").setup({})
+        require("fidget").setup()
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
@@ -50,60 +51,54 @@ return {
                         capabilities = capabilities
                     }
                 end,
-
-                ["lua_ls"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.lua_ls.setup {
-                        capabilities = capabilities,
-                        settings = {
-                            Lua = {
-                                runtime = { version = "Lua 5.1" },
-                                diagnostics = {
-                                    globals = { "vim", "it", "describe", "before_each", "after_each" },
-                                }
-                            }
-                        }
-                    }
-                end,
-
-                ["rust_analyzer"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.rust_analyzer.setup {
-                        capabilities = capabilities,
-                        settings = {
-                            ["rust-analyzer"] = {
-                                cargo = {
-                                    buildScripts = {
-                                        enable = true
-                                    },
-                                },
-                                procMacro = {
-                                    enable = true
-                                },
-                            }
-
-                        }
-                    }
-                end,
-
-                ["pyright"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.pyright.setup {
-                        capabilities = capabilities,
-                        settings = {
-                            python = {
-                                analysis = {
-                                    autoSearchPaths = true,
-                                    typeCheckingMode = "off",
-                                    diagnosticMode = "openFilesOnly",
-                                    useLibraryCodeForTypes = true,
-                                }
-                            }
-                        }
-                    }
-                end,
             }
         })
+
+        local lspconfig = require("lspconfig")
+        lspconfig.pyright.setup({
+            capabilities = capabilities,
+            settings = {
+                python = {
+                    analysis = {
+                        autoSearchPaths = true,
+                        typeCheckingMode = "basic",
+                        diagnosticMode = "openFilesOnly",
+                        useLibraryCodeForTypes = true,
+                    }
+                }
+            }
+        })
+
+        lspconfig.lua_ls.setup({
+            capabilities = capabilities,
+            settings = {
+                Lua = {
+                    runtime = { version = "Lua 5.1" },
+                    diagnostics = {
+                        globals = { "vim", "it", "describe", "before_each", "after_each" },
+                    }
+                }
+            }
+        })
+
+        lspconfig.rust_analyzer.setup({
+            capabilities = capabilities,
+            settings = {
+                ["rust-analyzer"] = {
+                    cargo = {
+                        buildScripts = {
+                            enable = true
+                        },
+                    },
+                    procMacro = {
+                        enable = true
+                    },
+                }
+
+            }
+        })
+
+
 
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
