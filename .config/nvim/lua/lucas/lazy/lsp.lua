@@ -55,6 +55,14 @@ return {
         })
 
         local lspconfig = require("lspconfig")
+        local capabilities_custom = vim.lsp.protocol.make_client_capabilities()
+        capabilities_custom.textDocument.completion.completionItem.snippetSupport = true
+
+        lspconfig.html.setup({
+            capabilities = capabilities_custom,
+            filetypes = { "html", "htmlangular" },
+        })
+
         lspconfig.pyright.setup({
             capabilities = capabilities,
             settings = {
