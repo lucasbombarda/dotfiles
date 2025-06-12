@@ -44,6 +44,7 @@ return {
                 "angularls",
                 "html",
                 "bashls",
+                "svelte",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
