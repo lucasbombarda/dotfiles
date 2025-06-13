@@ -143,9 +143,6 @@ source <(ng completion script)
 export PATH="$HOME/.local/bin:$PATH"
 eval "$(zoxide init --cmd cd zsh)"
 
-# Load TheFuck
-eval $(thefuck --alias)
-
 # Load Nim
 export PATH="$HOME/.nimble/bin:$PATH"
 

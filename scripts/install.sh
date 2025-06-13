@@ -7,7 +7,7 @@ echo "Created temporary directory: $TEMP_DIR"
 echo "All to-be-deleted files will be moved here first."
 
 ######################################
-# 1. Update system packages
+# Update system packages
 ######################################
 echo "Updating all installed packages and distro"
 sudo apt update
@@ -15,7 +15,7 @@ sudo apt upgrade -y
 sudo apt dist-upgrade -y
 
 ######################################
-# 2. Install common packages
+# Install common packages
 ######################################
 sudo apt install -y git curl build-essential dkms perl wget
 sudo apt install -y make default-libmysqlclient-dev libssl-dev
@@ -23,51 +23,45 @@ sudo apt install -y zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev \
     llvm libncurses5-dev libncursesw5-dev xz-utils libffi-dev liblzma-dev
 
 ######################################
-# 3. Remove unused packages
+# Remove unused packages
 ######################################
 echo "Removing unused packages"
 sudo apt clean
 sudo apt autoremove -y
 
 ######################################
-# 4. Install flatpak
+# Install flatpak
 ######################################
 echo "Installing flatpak"
 sudo apt install -y flatpak
 
 ######################################
-# 5. Install Stow
+# Install Stow
 ######################################
 echo "Installing Stow"
 sudo apt install -y stow
 
 ######################################
-# 6. Install tmux
+# Install tmux
 ######################################
 echo "Installing tmux"
 sudo apt install -y tmux
 
 ######################################
-# 7. Install ripgrep
+# Install ripgrep
 ######################################
 echo "Installing ripgrep"
 sudo apt install -y ripgrep
 
 ######################################
-# 8. Install thefuck
-######################################
-echo "Installing thefuck"
-sudo apt install -y thefuck
-
-######################################
-# 9. Install zoxide
+# Install zoxide
 ######################################
 echo "Installing zoxide"
 curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 sudo apt install fzf
 
 ######################################
-# 10. Install NeoVim
+# Install NeoVim
 ######################################
 echo "Installing NeoVim"
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
@@ -82,33 +76,32 @@ sudo mv /usr/bin/vim "$TEMP_DIR" 2>/dev/null || true
 sudo ln -s /usr/bin/nvim /usr/bin/vim
 
 ######################################
-# 11. Install Compilers and Interpreters
+# C/C++ (GCC)
 ######################################
 echo "Installing C/C++ (GCC)"
 sudo apt install -y gcc g++
 
 ######################################
-# 11a. Rust
+# Rust
 ######################################
 echo "Installing Rust"
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 echo "Activating cargo"
 
-
 ######################################
-# 11c. Bun
+# Bun
 ######################################
 echo "Installing Bun"
 curl -fsSL https://bun.sh/install | bash
 
 ######################################
-# 11d. Python 3.11
+# Python 3.11
 ######################################
 echo "Installing Python 3.11"
 sudo apt install -y python3.11 python3.11-dev python3.11-venv
 
 ######################################
-# 11e. Lua 5.1.5
+# Lua 5.1.5
 ######################################
 echo "Installing Lua 5.1.5"
 curl -L -R -O https://www.lua.org/ftp/lua-5.1.5.tar.gz
@@ -121,7 +114,7 @@ sudo mv lua-5.1.5.tar.gz "$TEMP_DIR" 2>/dev/null || true
 sudo mv lua-5.1.5 "$TEMP_DIR" 2>/dev/null || true
 
 ######################################
-# 11f. Go
+# Go
 ######################################
 echo "Installing Go"
 go_version="$(curl -s https://go.dev/VERSION?m=text | head -n 1)"
@@ -134,13 +127,13 @@ export PATH="$PATH:/usr/local/go/bin"
 sudo mv "${go_version}.linux-amd64.tar.gz" "$TEMP_DIR" 2>/dev/null || true
 
 ######################################
-# 12. Install zsh, oh-my-zsh, and plugins
+# Install zsh, oh-my-zsh, and plugins
 ######################################
 echo "Installing zsh, oh-my-zsh, and plugins"
 sudo apt install -y zsh
 chsh -s /bin/zsh
 
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unnattended
 
 # Spaceship theme
 git clone https://github.com/spaceship-prompt/spaceship-prompt.git \
@@ -157,7 +150,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
 mv "$HOME/.zshrc" "$TEMP_DIR" 2>/dev/null || true
 
 ######################################
-# 13. Cleanup (final)
+# Cleanup
 ######################################
 echo "Now removing the temporary directory and its contents:"
 sudo rm -rf "$TEMP_DIR"
