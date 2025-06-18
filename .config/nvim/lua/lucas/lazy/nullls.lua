@@ -5,6 +5,7 @@ return {
         local null_ls = require('null-ls')
         -- define sources
         local sources = {
+            null_ls.builtins.formatting.prettier,
             null_ls.builtins.diagnostics.djlint,
             null_ls.builtins.formatting.djlint,
         }
