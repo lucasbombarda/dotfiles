@@ -107,25 +107,17 @@ return {
             }
         })
 
-        local ts_js_format = {
-            indentSize = 2,
-            convertTabsToSpaces = true,
-            tabSize = 2,
-            indentStyle = "Smart",
-            semicolons = "insert",
-            trimTrailingWhitespace = true,
-        }
         lspconfig.ts_ls.setup({
             capabilities = capabilities,
             settings = {
                 typescript = {
                     format = {
-                        ts_js_format
+                        enable = false,
                     }
                 },
                 javascript = {
                     format = {
-                        ts_js_format
+                        enable = false,
                     }
                 }
             }
