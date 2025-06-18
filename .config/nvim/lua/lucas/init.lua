@@ -48,6 +48,19 @@ autocmd({ "BufRead", "BufNewFile" }, {
     end,
 })
 
+-- Run svelte-kit sync on save for Svelte files
+autocmd({ "BufWritePost" }, {
+    group = LucasGroup,
+    pattern = { "+*.svelte", "+*.ts", "+*.js" },
+    callback = function()
+        vim.fn.jobstart({ "npm", "exec", "-y", "svelte-kit", "sync" }, {
+            stdout_buffered = true,
+            stderr_buffered = true,
+            detach = true,
+        })
+    end,
+})
+
 
 autocmd('LspAttach', {
     group = LucasGroup,
