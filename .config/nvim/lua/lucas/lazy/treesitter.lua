@@ -8,7 +8,7 @@ return {
                 "vimdoc", "javascript", "typescript", "c", "lua", "rust",
                 "jsdoc", "bash", "python", "json", "css",
                 "go", "gitignore", "htmldjango", "html", "sql",
-                "angular",
+                "angular", "svelte",
             },
 
             -- Install parsers synchronously (only applied to `ensure_installed`)
