@@ -107,6 +107,30 @@ return {
             }
         })
 
+        local ts_js_format = {
+            indentSize = 2,
+            convertTabsToSpaces = true,
+            tabSize = 2,
+            indentStyle = "Smart",
+            semicolons = "insert",
+            trimTrailingWhitespace = true,
+        }
+        lspconfig.ts_ls.setup({
+            capabilities = capabilities,
+            settings = {
+                typescript = {
+                    format = {
+                        ts_js_format
+                    }
+                },
+                javascript = {
+                    format = {
+                        ts_js_format
+                    }
+                }
+            }
+        })
+
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
         cmp.setup({
