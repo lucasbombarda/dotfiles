@@ -107,20 +107,27 @@ return {
             }
         })
 
+        local ts_js_format = {
+            indentSize = 4,
+            convertTabsToSpaces = true,
+            indentStyle = "Smart",
+            semicolons = "insert",
+            trimTrailingWhitespace = true,
+        }
         lspconfig.ts_ls.setup({
             capabilities = capabilities,
-            on_attach = function(client, bufnr)
-                client.server_capabilities.documentFormattingProvider = false
-                client.server_capabilities.documentRangeFormattingProvider = false
-            end,
-            typescript = {
-                format = {
-                    enable = false,
-                }
+            init_options = {
+                hostInfo = "neovim",
+                preferences = {
+                    quotePreference = "double",
+                },
             },
-            javascript = {
-                format = {
-                    enable = false,
+            settings = {
+                typescript = {
+                    format = ts_js_format,
+                },
+                javascript = {
+                    format = ts_js_format,
                 }
             }
         })
