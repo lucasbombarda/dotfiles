@@ -109,16 +109,18 @@ return {
 
         lspconfig.ts_ls.setup({
             capabilities = capabilities,
-            settings = {
-                typescript = {
-                    format = {
-                        enable = false,
-                    }
-                },
-                javascript = {
-                    format = {
-                        enable = false,
-                    }
+            on_attach = function(client, bufnr)
+                client.server_capabilities.documentFormattingProvider = false
+                client.server_capabilities.documentRangeFormattingProvider = false
+            end,
+            typescript = {
+                format = {
+                    enable = false,
+                }
+            },
+            javascript = {
+                format = {
+                    enable = false,
                 }
             }
         })
