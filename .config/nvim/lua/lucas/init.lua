@@ -66,7 +66,30 @@ autocmd('LspAttach', {
     group = LucasGroup,
     callback = function(e)
         local opts = { buffer = e.buf }
-        vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+        vim.keymap.set("n", "gd", function()
+            vim.lsp.buf.definition({
+                reuse_win = true,
+                on_list = function(options)
+                    local items = options.items or {}
+                    local seen, uniq = {}, {}
+                    for _, it in ipairs(items) do
+                        local key = table.concat({ it.filename, it.lnum, it.col }, ":")
+                        if not seen[key] then
+                            seen[key] = true
+                            table.insert(uniq, it)
+                        end
+                    end
+                    if #uniq == 1 then
+                        local first = uniq[1]
+                        vim.cmd("edit " .. first.filename)
+                        vim.api.nvim_win_set_cursor(0, { first.lnum, first.col })
+                    elseif #uniq > 1 then
+                        vim.fn.setqflist({}, " ", { title = "Definitions", items = uniq })
+                        vim.cmd("copen")
+                    end
+                end,
+            })
+        end, opts)
         vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
         vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
         vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
