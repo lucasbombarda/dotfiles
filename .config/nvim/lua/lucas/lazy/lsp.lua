@@ -64,6 +64,11 @@ return {
             filetypes = { "html", "htmlangular" },
         })
 
+        lspconfig.svelte.setup({
+            capabilities = capabilities,
+            filetypes = { "svelte" },
+        })
+
         lspconfig.pyright.setup({
             capabilities = capabilities,
             settings = {

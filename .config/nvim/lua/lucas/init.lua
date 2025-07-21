@@ -39,6 +39,15 @@ autocmd({ "BufRead", "BufNewFile" }, {
     end,
 })
 
+
+autocmd({ "BufRead", "BufNewFile" }, {
+    group = LucasGroup,
+    pattern = { "*.svelte", "+*.ts", "+*.js" },
+    callback = function()
+        vim.bo.filetype = "svelte"
+    end,
+})
+
 -- Automatically set the Django filetype for template files
 autocmd({ "BufRead", "BufNewFile" }, {
     group = LucasGroup,
