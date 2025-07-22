@@ -42,7 +42,7 @@ autocmd({ "BufRead", "BufNewFile" }, {
 
 autocmd({ "BufRead", "BufNewFile" }, {
     group = LucasGroup,
-    pattern = { "*.svelte", "+*.ts", "+*.js" },
+    pattern = { "*.svelte" },
     callback = function()
         vim.bo.filetype = "svelte"
     end,
