@@ -62,7 +62,7 @@ autocmd({ "BufWritePost" }, {
     group = LucasGroup,
     pattern = { "*.svelte", "+*.ts", "+*.js" },
     callback = function()
-        vim.fn.jobstart({ "npm", "run", "check" }, {
+        vim.fn.jobstart({ "bun", "run", "check" }, {
             stdout_buffered = true,
             stderr_buffered = true,
             detach = true,

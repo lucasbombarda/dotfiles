@@ -64,6 +64,11 @@ return {
             filetypes = { "html", "htmlangular" },
         })
 
+        lspconfig.angularls.setup({
+            capabilities = capabilities,
+            filetypes = { "typescript", "htmlangular" },
+        })
+
         lspconfig.svelte.setup({
             capabilities = capabilities,
             filetypes = { "svelte" },
