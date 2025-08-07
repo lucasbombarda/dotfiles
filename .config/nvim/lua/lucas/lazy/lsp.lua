@@ -61,7 +61,7 @@ return {
 
         lspconfig.html.setup({
             capabilities = capabilities_custom,
-            filetypes = { "html", "htmlangular" },
+            filetypes = { "html", "htmlangular", "svelte", "htmldjango" },
         })
 
         lspconfig.angularls.setup({
@@ -126,6 +126,7 @@ return {
         }
         lspconfig.ts_ls.setup({
             capabilities = capabilities,
+            filetypes = { "typescript", "svelte", "javascript" },
             init_options = {
                 hostInfo = "neovim",
                 preferences = {
