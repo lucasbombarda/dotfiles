@@ -15,5 +15,5 @@ sudo apt clean
 sudo apt autoremove -y
 
 $HOME/.cargo/bin/rustup update
-$HOME/.bun/bin/bun update --stable
+$HOME/.bun/bin/bun upgrade --stable
 
