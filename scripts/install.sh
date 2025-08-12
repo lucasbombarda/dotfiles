@@ -95,12 +95,6 @@ echo "Installing Bun"
 curl -fsSL https://bun.sh/install | bash
 
 ######################################
-# Python 3.11
-######################################
-echo "Installing Python 3.11"
-sudo apt install -y python3.11 python3.11-dev python3.11-venv
-
-######################################
 # Lua 5.1.5
 ######################################
 echo "Installing Lua 5.1.5"
@@ -127,13 +121,22 @@ export PATH="$PATH:/usr/local/go/bin"
 sudo mv "${go_version}.linux-amd64.tar.gz" "$TEMP_DIR" 2>/dev/null || true
 
 ######################################
+# NVM
+######################################
+export NVM_DIR="$HOME/.nvm" && (
+  git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
+  cd "$NVM_DIR"
+  git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+) && \. "$NVM_DIR/nvm.sh"
+
+######################################
 # Install zsh, oh-my-zsh, and plugins
 ######################################
 echo "Installing zsh, oh-my-zsh, and plugins"
 sudo apt install -y zsh
 chsh -s /bin/zsh
 
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unnattended
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 # Spaceship theme
 git clone https://github.com/spaceship-prompt/spaceship-prompt.git \
