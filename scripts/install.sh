@@ -121,6 +121,11 @@ export PATH="$PATH:/usr/local/go/bin"
 sudo mv "${go_version}.linux-amd64.tar.gz" "$TEMP_DIR" 2>/dev/null || true
 
 ######################################
+# UV (Python)
+######################################
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+######################################
 # NVM
 ######################################
 export NVM_DIR="$HOME/.nvm" && (
