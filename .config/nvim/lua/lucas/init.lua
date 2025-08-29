@@ -30,16 +30,6 @@ autocmd({ "BufWritePre" }, {
     command = [[%s/\s\+$//e]],
 })
 
--- Automatically set the Angular filetype for component files
-autocmd({ "BufRead", "BufNewFile" }, {
-    group = LucasGroup,
-    pattern = "*.component.html",
-    callback = function()
-        vim.bo.filetype = "htmlangular"
-    end,
-})
-
-
 autocmd({ "BufRead", "BufNewFile" }, {
     group = LucasGroup,
     pattern = { "*.svelte" },
@@ -57,8 +47,7 @@ autocmd({ "BufRead", "BufNewFile" }, {
     end,
 })
 
--- Run svelte-kit sync on save for Svelte files
-autocmd({ "BufWritePost" }, {
+autocmd({ "BufNewFile" }, {
     group = LucasGroup,
     pattern = { "*.svelte", "+*.ts", "+*.js" },
     callback = function()

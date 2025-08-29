@@ -41,7 +41,6 @@ return {
                 "biome",
                 "gopls",
                 "ts_ls",
-                "angularls",
                 "html",
                 "bashls",
                 "svelte",
@@ -61,12 +60,7 @@ return {
 
         lspconfig.html.setup({
             capabilities = capabilities_custom,
-            filetypes = { "html", "htmlangular", "svelte", "htmldjango" },
-        })
-
-        lspconfig.angularls.setup({
-            capabilities = capabilities,
-            filetypes = { "typescript", "htmlangular" },
+            filetypes = { "html", "svelte", "htmldjango" },
         })
 
         lspconfig.svelte.setup({
