@@ -60,7 +60,7 @@ return {
 
         lspconfig.html.setup({
             capabilities = capabilities_custom,
-            filetypes = { "html", "svelte", "htmldjango" },
+            filetypes = { "html", "htmldjango" },
         })
 
         lspconfig.svelte.setup({
