@@ -37,7 +37,6 @@ return {
                 "ruff",
                 "pyright",
                 "cssls",
-                "sqlls",
                 "biome",
                 "gopls",
                 "ts_ls",
@@ -157,6 +156,13 @@ return {
             }, {
                 { name = 'buffer' },
             })
+        })
+
+        cmp.setup.filetype({ "sql" }, {
+            sources = {
+                { name = 'vim-dadbod-completion' },
+                { name = 'buffer' },
+            }
         })
 
         vim.diagnostic.config({
