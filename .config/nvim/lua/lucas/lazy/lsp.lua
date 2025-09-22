@@ -47,9 +47,9 @@ return {
             },
             handlers = {
                 function(server_name) -- default handler (optional)
-                    vim.lsp.config[server_name].setup {
+                    vim.lsp.config(server_name, {
                         capabilities = capabilities
-                    }
+                    })
                 end,
             }
         })
