@@ -29,6 +29,7 @@ return {
 
         require("fidget").setup()
         require("mason").setup()
+
         require("mason-lspconfig").setup({
             ensure_installed = {
                 "lua_ls",
@@ -46,28 +47,27 @@ return {
             },
             handlers = {
                 function(server_name) -- default handler (optional)
-                    require("lspconfig")[server_name].setup {
+                    vim.lsp.config[server_name].setup {
                         capabilities = capabilities
                     }
                 end,
             }
         })
 
-        local lspconfig = require("lspconfig")
         local capabilities_custom = vim.lsp.protocol.make_client_capabilities()
         capabilities_custom.textDocument.completion.completionItem.snippetSupport = true
 
-        lspconfig.html.setup({
+        vim.lsp.config("html", {
             capabilities = capabilities_custom,
             filetypes = { "html" },
         })
 
-        lspconfig.svelte.setup({
+        vim.lsp.config("svelte", {
             capabilities = capabilities,
             filetypes = { "svelte" },
         })
 
-        lspconfig.pyright.setup({
+        vim.lsp.config("pyright", {
             capabilities = capabilities,
             settings = {
                 python = {
@@ -81,7 +81,7 @@ return {
             }
         })
 
-        lspconfig.lua_ls.setup({
+        vim.lsp.config("lua_ls", {
             capabilities = capabilities,
             settings = {
                 Lua = {
@@ -93,7 +93,7 @@ return {
             }
         })
 
-        lspconfig.rust_analyzer.setup({
+        vim.lsp.config("rust_analyzer", {
             capabilities = capabilities,
             settings = {
                 ["rust-analyzer"] = {
@@ -117,7 +117,7 @@ return {
             semicolons = "insert",
             trimTrailingWhitespace = true,
         }
-        lspconfig.ts_ls.setup({
+        vim.lsp.config("ts_ls", {
             capabilities = capabilities,
             filetypes = { "typescript", "svelte", "javascript" },
             init_options = {
