@@ -152,8 +152,9 @@ export PATH="$HOME/.nimble/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 
 # Android SDK
-export ANDROID_HOME=$HOME/etc/android-sdk
-export PATH=$PATH:$ANDROID_HOME/platform-tools
+export JAVA_HOME="$HOME/etc/android-studio/jbr"
+export ANDROID_HOME="$HOME/Android/Sdk"
+export NDK_HOME="$HOME/etc/ndk/$(ls -1 $HOME/etc/ndk)"
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
@@ -161,3 +162,6 @@ source <(ng completion script)
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
