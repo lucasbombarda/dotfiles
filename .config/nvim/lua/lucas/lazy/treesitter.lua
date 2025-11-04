@@ -1,8 +1,11 @@
 return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
+    branch = "main",
+    lazy = false,
     config = function()
-        require("nvim-treesitter.configs").setup({
+        require("nvim-treesitter").setup({
+
             -- A list of parser names, or "all"
             ensure_installed = {
                 "vimdoc", "javascript", "typescript", "c", "lua", "rust",
@@ -17,10 +20,6 @@ return {
             -- Automatically install missing parsers when entering buffer
             -- Recommendation: set to false if you don"t have `tree-sitter` CLI installed locally
             auto_install = true,
-
-            indent = {
-                enable = true
-            },
 
             highlight = {
                 -- `false` will disable the whole extension
