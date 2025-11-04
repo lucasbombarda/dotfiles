@@ -37,6 +37,10 @@ else
     tmux send-keys -t $PROJECT_NAME:3 '. venv/bin/activate' C-m
 fi
 
+# Git operations
+tmux send-keys -t $PROJECT_NAME:3 'git fetch origin --prune' C-m
+tmux send-keys -t $PROJECT_NAME:3 'git pull origin main' C-m
+
 tmux select-window -t $PROJECT_NAME:1
 tmux attach -t $PROJECT_NAME
 
