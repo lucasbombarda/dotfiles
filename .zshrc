@@ -109,9 +109,6 @@ alias camv="sudo modprobe v4l2loopback && scrcpy --video-source=camera --no-audi
 # alias to copy the output to the clipboard using xclip
 alias clip="xclip -selection clipboard"
 
-# alias to open android studio
-alias android-studio="sudo /usr/local/android-studio/bin/studio.sh"
-
 # alias to update all packages
 alias update="$HOME/scripts/update_all.sh"
 
@@ -155,6 +152,7 @@ export PATH=$PATH:/usr/local/go/bin
 export JAVA_HOME="$HOME/etc/android-studio/jbr"
 export ANDROID_HOME="$HOME/Android/Sdk"
 export NDK_HOME="$HOME/etc/ndk/$(ls -1 $HOME/etc/ndk)"
+export PATH="$PATH:$HOME/etc/android-studio/bin"
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
@@ -165,3 +163,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# Load flutter
+export PATH="$PATH:$HOME/etc/flutter/bin"
