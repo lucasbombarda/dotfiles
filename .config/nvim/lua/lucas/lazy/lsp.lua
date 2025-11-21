@@ -173,6 +173,17 @@ return {
             }
         })
 
+        vim.lsp.config("dartls", {
+            capabilities = capabilities,
+            settings = {
+                dart = {
+                    completeFunctionCalls = true,
+                    showTodos = true,
+                    updateImportsOnRename = true,
+                }
+            }
+        })
+
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
         cmp.setup({
