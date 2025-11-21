@@ -47,6 +47,15 @@ autocmd({ "BufRead", "BufNewFile" }, {
     end,
 })
 
+autocmd({ "BufRead", "BufNewFile" }, {
+    group = LucasGroup,
+    pattern = { "*.dart" },
+    callback = function()
+        vim.opt.shiftwidth = 2
+        vim.opt.tabstop = 2
+    end,
+})
+
 autocmd({ "BufNewFile" }, {
     group = LucasGroup,
     pattern = { "*.svelte", "+*.ts", "+*.js" },
