@@ -1,0 +1,22 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+add_newline = true
+
+command_timeout = 2000
+
+[package]
+disabled = true
+
+[git_branch]
+truncation_length = 4
+truncation_symbol = ""
+
+[git_commit]
+commit_hash_length = 4
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+
+[directory]
+style = "bold blue"
+truncation_length = 3
+truncate_to_repo = true

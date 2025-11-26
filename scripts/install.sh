@@ -143,11 +143,8 @@ chsh -s /bin/zsh
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-# Spaceship theme
-git clone https://github.com/spaceship-prompt/spaceship-prompt.git \
-    "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/spaceship-prompt" --depth=1
-ln -s "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/spaceship-prompt/spaceship.zsh-theme" \
-        "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/spaceship.zsh-theme"
+# Starship theme
+sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- --yes
 
 # ZSH plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions \
@@ -164,6 +161,6 @@ echo "Now removing the temporary directory and its contents:"
 sudo rm -rf "$TEMP_DIR"
 echo "Temporary directory removed."
 
-echo -e "\n\n\n------------------ COMPLETE ------------------"
+echo -e "\n\n\n------------------ COMPLETE ------------------
 echo "Ready to run 'stow .' inside the dotfiles directory to symlink the dotfiles."
 
