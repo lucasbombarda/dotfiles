@@ -27,6 +27,9 @@ if [ $SHELL_TYPE = "fish" ]; then
 else
     tmux send-keys -t $PROJECT_NAME:2 '. venv/bin/activate' C-m
 fi
+
+tmux send-keys -t $PROJECT_NAME:2 'python manage.py makemigrations' C-m
+tmux send-keys -t $PROJECT_NAME:2 'python manage.py migrate' C-m
 tmux send-keys -t $PROJECT_NAME:2 'python manage.py runserver' C-m
 
 # Shell
