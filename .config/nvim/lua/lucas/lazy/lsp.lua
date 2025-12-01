@@ -44,6 +44,7 @@ return {
 				"bashls",
 				"svelte",
 				"tailwindcss",
+                "sqruff",
 			},
 			handlers = {
 				function(server_name) -- default handler (optional)
@@ -85,9 +86,17 @@ return {
 				"typescriptreact",
 				"vue",
 				"svelte",
-				"heex",
 			},
 		})
+
+        vim.lsp.config("sqruff", {
+            capabilities = capabilities,
+            settings = {
+                sqruff = {
+                    dialect = "postgres",
+                },
+            },
+        })
 
 		vim.lsp.config("pyright", {
 			capabilities = capabilities,

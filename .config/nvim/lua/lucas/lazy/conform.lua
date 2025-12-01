@@ -18,6 +18,7 @@ return {
 				rust = { "rustfmt" },
 				python = { "ruff" },
 				htmldjango = { "djlint" },
+                sql = { "sqruff" },
 			},
 			formatters = {
 				["clang-format"] = {
