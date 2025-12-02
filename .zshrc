@@ -152,4 +152,3 @@ export PATH="$PATH:$HOME/.rvm/bin"
 # Load flutter
 export PATH="$PATH:$HOME/etc/flutter/bin"
 
-eval $(thefuck --alias)
