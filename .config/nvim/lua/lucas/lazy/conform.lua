@@ -4,8 +4,10 @@ return {
 	config = function()
 		require("conform").setup({
 			format_on_save = {
-				timeout_ms = 5000,
+				timeout_ms = 1000,
 				lsp_format = "fallback",
+				lsp_fallback = true,
+				async = false,
 			},
 			formatters_by_ft = {
 				c = { "clang-format" },
@@ -17,12 +19,11 @@ return {
 				svelte = { "prettier" },
 				rust = { "rustfmt" },
 				python = {
-                    "ruff_fix",
-                    "ruff_format",
-                    "ruff_organize_imports",
-                },
+					"ruff_fix",
+					"ruff_format",
+					"ruff_organize_imports",
+				},
 				htmldjango = { "djlint" },
-                sql = { "sqruff" },
 			},
 			formatters = {
 				["clang-format"] = {
