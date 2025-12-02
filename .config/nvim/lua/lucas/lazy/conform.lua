@@ -16,7 +16,11 @@ return {
 				typescript = { "prettier" },
 				svelte = { "prettier" },
 				rust = { "rustfmt" },
-				python = { "ruff" },
+				python = {
+                    "ruff_fix",
+                    "ruff_format",
+                    "ruff_organize_imports",
+                },
 				htmldjango = { "djlint" },
                 sql = { "sqruff" },
 			},
