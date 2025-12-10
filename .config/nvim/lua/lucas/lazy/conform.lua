@@ -3,12 +3,6 @@ return {
 	opts = {},
 	config = function()
 		require("conform").setup({
-			format_on_save = {
-				timeout_ms = 1000,
-				lsp_format = "fallback",
-				lsp_fallback = true,
-				async = false,
-			},
 			formatters_by_ft = {
 				c = { "clang-format" },
 				cpp = { "clang-format" },
