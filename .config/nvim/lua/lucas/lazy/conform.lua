@@ -3,6 +3,11 @@ return {
 	opts = {},
 	config = function()
 		require("conform").setup({
+			default_format_opts = {
+				lsp_fallback = true,
+				timeout_ms = 3000,
+			},
+
 			formatters_by_ft = {
 				c = { "clang-format" },
 				cpp = { "clang-format" },
@@ -25,6 +30,9 @@ return {
 				},
 				["djlint"] = {
 					prepend_args = { "$FILENAME", "--reformat", "--format-css", "--format-js", "--quiet" },
+				},
+				["prettier"] = {
+					prepend_args = { "$FILENAME" },
 				},
 			},
 		})
