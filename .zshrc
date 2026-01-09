@@ -137,7 +137,9 @@ export PATH="$HOME/.nimble/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 
 # Android SDK
-export JAVA_HOME="$HOME/etc/android-studio/jbr"
+export JAVA_HOME=$(readlink -f $(which java) | sed "s:bin/java::")
+export PATH="$PATH:$JAVA_HOME/bin"
+# export JAVA_HOME="$HOME/etc/android-studio/jbr"
 export ANDROID_HOME="$HOME/Android/Sdk"
 export NDK_HOME="$HOME/etc/ndk/$(ls -1 $HOME/etc/ndk)"
 export PATH="$PATH:$HOME/etc/android-studio/bin"
