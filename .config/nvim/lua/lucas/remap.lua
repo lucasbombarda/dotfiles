@@ -38,3 +38,8 @@ vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
 
+-- Disable arrow keys to get used to hjkl for real, this time for good
+vim.keymap.set({ "n", "v", "i", "c" }, "<Up>", "<nop>")
+vim.keymap.set({ "n", "v", "i", "c" }, "<Down>", "<nop>")
+vim.keymap.set({ "n", "v", "i", "c" }, "<Left>", "<nop>")
+vim.keymap.set({ "n", "v", "i", "c" }, "<Right>", "<nop>")
