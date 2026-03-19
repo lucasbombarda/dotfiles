@@ -16,6 +16,7 @@ return {
 				javascript = { "prettier" },
 				typescript = { "prettier" },
 				svelte = { "prettier" },
+                css = { "prettier" },
 				rust = { "rustfmt" },
 				python = {
 					"ruff_fix",
