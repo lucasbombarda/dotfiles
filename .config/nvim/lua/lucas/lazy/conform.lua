@@ -24,6 +24,7 @@ return {
 					"ruff_organize_imports",
 				},
 				htmldjango = { "djlint" },
+                sql = { "pg_format" },
 			},
 			formatters = {
 				["clang-format"] = {
@@ -35,6 +36,18 @@ return {
 				["prettier"] = {
 					prepend_args = { "$FILENAME" },
 				},
+                ["pg_format"] = {
+                    command = "pg_format",
+                    args = {
+                        "--keyword-case", "2",
+                        "--type-case", "2",
+                        "--function-case", "2",
+                        "--spaces", "4",
+                        "--no-space-function",
+                        "-",
+                    },
+                    stdin = true,
+                },
 			},
 		})
 
