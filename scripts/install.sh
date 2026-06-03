@@ -6,59 +6,89 @@ TEMP_DIR="$(mktemp -d)"
 echo "Created temporary directory: $TEMP_DIR"
 echo "All to-be-deleted files will be moved here first."
 
+if command -v dnf &> /dev/null; then
+    PM="dnf"
+elif command -v apt-get &> /dev/null; then
+    PM="apt"
+else
+    echo "Unsupported package manager." >&2
+    exit 1
+fi
+
+sys_update() {
+    if [ "$PM" = "dnf" ]; then
+        sudo dnf upgrade -y
+    else
+        sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y
+    fi
+}
+
+sys_install() {
+    sudo $PM install -y "$@"
+}
+
+sys_cleanup() {
+    if [ "$PM" = "dnf" ]; then
+        sudo dnf clean all && sudo dnf autoremove -y
+    else
+        sudo apt clean && sudo apt autoremove -y
+    fi
+}
+
 ######################################
 # Update system packages
 ######################################
 echo "Updating all installed packages and distro"
-sudo apt update
-sudo apt upgrade -y
-sudo apt dist-upgrade -y
+sys_update
 
 ######################################
 # Install common packages
 ######################################
-sudo apt install -y git curl build-essential dkms perl wget
-sudo apt install -y make default-libmysqlclient-dev libssl-dev
-sudo apt install -y zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev \
-    llvm libncurses5-dev libncursesw5-dev xz-utils libffi-dev liblzma-dev
+if [ "$PM" = "dnf" ]; then
+    sys_install git curl dkms perl wget make mariadb-devel openssl-devel \
+        zlib-devel bzip2-devel readline-devel sqlite-devel llvm ncurses-devel xz-devel libffi-devel
+} else
+    sys_install git curl build-essential dkms perl wget make default-libmysqlclient-dev \
+        libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm \
+        libncurses5-dev libncursesw5-dev xz-utils libffi-dev liblzma-dev
+fi
 
 ######################################
 # Remove unused packages
 ######################################
 echo "Removing unused packages"
-sudo apt clean
-sudo apt autoremove -y
+sys_cleanup
 
 ######################################
 # Install flatpak
 ######################################
 echo "Installing flatpak"
-sudo apt install -y flatpak
+sys_install flatpak
 
 ######################################
 # Install Stow
 ######################################
 echo "Installing Stow"
-sudo apt install -y stow
+sys_install stow
 
 ######################################
 # Install tmux
 ######################################
 echo "Installing tmux"
-sudo apt install -y tmux
+sys_install tmux
 
 ######################################
 # Install ripgrep
 ######################################
 echo "Installing ripgrep"
-sudo apt install -y ripgrep
+sys_install ripgrep
 
 ######################################
 # Install zoxide
 ######################################
 echo "Installing zoxide"
 curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-sudo apt install fzf
+sys_install fzf
 
 ######################################
 # Install NeoVim
@@ -79,7 +109,11 @@ sudo ln -s /usr/bin/nvim /usr/bin/vim
 # C/C++ (GCC)
 ######################################
 echo "Installing C/C++ (GCC)"
-sudo apt install -y gcc g++
+if [ "$PM" = "dnf" ]; then
+    sys_install gcc gcc-c++
+else
+    sys_install gcc g++
+fi
 
 ######################################
 # Rust
@@ -138,7 +172,7 @@ export NVM_DIR="$HOME/.nvm" && (
 # Install zsh, oh-my-zsh, and plugins
 ######################################
 echo "Installing zsh, oh-my-zsh, and plugins"
-sudo apt install -y zsh
+sys_install zsh
 chsh -s /bin/zsh
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
@@ -161,6 +195,5 @@ echo "Now removing the temporary directory and its contents:"
 sudo rm -rf "$TEMP_DIR"
 echo "Temporary directory removed."
 
-echo -e "\n\n\n------------------ COMPLETE ------------------
+echo -e "\n\n\n------------------ COMPLETE ------------------"
 echo "Ready to run 'stow .' inside the dotfiles directory to symlink the dotfiles."
-
