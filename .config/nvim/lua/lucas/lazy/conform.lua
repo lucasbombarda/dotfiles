@@ -1,10 +1,9 @@
 return {
 	"stevearc/conform.nvim",
-	opts = {},
 	config = function()
 		require("conform").setup({
 			default_format_opts = {
-				lsp_fallback = true,
+				lsp_format = "fallback",
 				timeout_ms = 10000,
 			},
 
@@ -16,7 +15,14 @@ return {
 				javascript = { "prettier" },
 				typescript = { "prettier" },
 				svelte = { "prettier" },
-                css = { "prettier" },
+				css = { "prettier" },
+				json = { "prettier" },
+				jsonc = { "prettier" },
+				yaml = { "prettier" },
+				markdown = { "prettier" },
+				sh = { "shfmt" },
+				bash = { "shfmt" },
+				toml = { "taplo" },
 				rust = { "rustfmt" },
 				python = {
 					"ruff_fix",
@@ -24,7 +30,7 @@ return {
 					"ruff_organize_imports",
 				},
 				htmldjango = { "djlint" },
-                sql = { "pg_format" },
+				sql = { "pg_format" },
 			},
 			formatters = {
 				["clang-format"] = {
@@ -36,18 +42,18 @@ return {
 				["prettier"] = {
 					prepend_args = { "$FILENAME" },
 				},
-                ["pg_format"] = {
-                    command = "pg_format",
-                    args = {
-                        "--keyword-case", "2",
-                        "--type-case", "2",
-                        "--function-case", "2",
-                        "--spaces", "4",
-                        "--no-space-function",
-                        "-",
-                    },
-                    stdin = true,
-                },
+				["pg_format"] = {
+					command = "pg_format",
+					args = {
+						"--keyword-case", "2",
+						"--type-case", "2",
+						"--function-case", "2",
+						"--spaces", "4",
+						"--no-space-function",
+						"-",
+					},
+					stdin = true,
+				},
 			},
 		})
 

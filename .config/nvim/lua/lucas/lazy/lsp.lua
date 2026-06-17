@@ -11,6 +11,7 @@ return {
 		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
 		"j-hui/fidget.nvim",
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
 
 	config = function()
@@ -26,10 +27,13 @@ return {
 		require("fidget").setup()
 		require("mason").setup()
 
+		vim.lsp.config("*", {
+			capabilities = capabilities,
+		})
+
 		require("mason-lspconfig").setup({
 			ensure_installed = {
 				"lua_ls",
-				"rust_analyzer",
 				"clangd",
 				"ruff",
 				"pyright",
@@ -40,27 +44,36 @@ return {
 				"bashls",
 				"svelte",
 				"tailwindcss",
+				"emmet_language_server",
 			},
-			handlers = {
-				function(server_name) -- default handler (optional)
-					vim.lsp.config(server_name, {
-						capabilities = capabilities,
-					})
-				end,
+			-- rust_analyzer is managed by rustaceanvim, keep mason-lspconfig
+			-- from enabling a second instance.
+			automatic_enable = {
+				exclude = { "rust_analyzer" },
 			},
 		})
 
-		local capabilities_custom = vim.lsp.protocol.make_client_capabilities()
-		capabilities_custom.textDocument.completion.completionItem.snippetSupport = true
-
-		vim.lsp.config("html", {
-			capabilities = capabilities_custom,
-			filetypes = { "html" },
+		require("mason-tool-installer").setup({
+			ensure_installed = {
+				"stylua",
+				"prettier",
+				"djlint",
+				"pgformatter",
+				"clang-format",
+				"shfmt",
+				"taplo",
+				"rust-analyzer",
+			},
 		})
 
 		vim.lsp.config("svelte", {
 			capabilities = capabilities,
 			filetypes = { "svelte" },
+		})
+
+		vim.lsp.config("emmet_language_server", {
+			capabilities = capabilities,
+			filetypes = { "html", "htmldjango", "css", "scss", "less", "svelte" },
 		})
 
 		vim.lsp.config("cssls", {
@@ -117,60 +130,6 @@ return {
 			},
 		})
 
-		vim.lsp.config("rust_analyzer", {
-			capabilities = capabilities,
-			settings = {
-				["rust-analyzer"] = {
-					inlayHints = {
-						bindingModeHints = {
-							enable = false,
-						},
-						chainingHints = {
-							enable = true,
-						},
-						closingBraceHints = {
-							enable = true,
-							minLines = 25,
-						},
-						closureReturnTypeHints = {
-							enable = "never",
-						},
-						lifetimeElisionHints = {
-							enable = "never",
-							useParameterNames = false,
-						},
-						maxLength = 25,
-						parameterHints = {
-							enable = true,
-						},
-						reborrowHints = {
-							enable = "never",
-						},
-						renderColons = true,
-						typeHints = {
-							enable = true,
-							hideClosureInitialization = false,
-							hideNamedConstructor = false,
-						},
-					},
-					diagnostics = {
-						enable = true,
-					},
-					check = {
-						command = "clippy",
-					},
-					cargo = {
-						buildScripts = {
-							enable = true,
-						},
-					},
-					procMacro = {
-						enable = true,
-					},
-				},
-			},
-		})
-
 		local ts_js_format = {
 			indentSize = 4,
 			convertTabsToSpaces = true,
@@ -193,17 +152,6 @@ return {
 				},
 				javascript = {
 					format = ts_js_format,
-				},
-			},
-		})
-
-		vim.lsp.config("dartls", {
-			capabilities = capabilities,
-			settings = {
-				dart = {
-					completeFunctionCalls = true,
-					showTodos = true,
-					updateImportsOnRename = true,
 				},
 			},
 		})
@@ -241,13 +189,13 @@ return {
 			virtual_text = {
 				current_line = true,
 			},
-			update_in_insert = true,
+			update_in_insert = false,
 
 			float = {
 				focusable = false,
 				style = "minimal",
 				border = "rounded",
-				source = "always",
+				source = true,
 				header = "",
 				prefix = "",
 			},

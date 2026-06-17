@@ -16,7 +16,7 @@ autocmd("TextYankPost", {
 	group = yank_group,
 	pattern = "*",
 	callback = function()
-		vim.highlight.on_yank({
+		vim.hl.on_yank({
 			higroup = "IncSearch",
 			timeout = 40,
 		})
@@ -56,10 +56,31 @@ autocmd({ "BufRead", "BufNewFile" }, {
 	end,
 })
 
-autocmd({ "BufNewFile" }, {
+autocmd({ "BufWritePost" }, {
 	group = LucasGroup,
 	pattern = { "*.svelte", "+*.ts", "+*.js" },
-	callback = function()
+	callback = function(args)
+		-- svelteserver won't attach to a file that didn't exist on disk yet.
+		-- After the first save, re-fire FileType so the LSP attaches without
+		-- reloading the buffer.
+		local buf = args.buf
+		if vim.bo[buf].filetype == "svelte" then
+			local has_svelte = false
+			for _, c in ipairs(vim.lsp.get_clients({ bufnr = buf })) do
+				if c.name == "svelte" then
+					has_svelte = true
+					break
+				end
+			end
+			if not has_svelte then
+				vim.schedule(function()
+					if vim.api.nvim_buf_is_valid(buf) then
+						vim.api.nvim_exec_autocmds("FileType", { buffer = buf })
+					end
+				end)
+			end
+		end
+
 		vim.fn.jobstart({ "bun", "run", "check" }, {
 			stdout_buffered = true,
 			stderr_buffered = true,
@@ -87,7 +108,7 @@ autocmd("LspAttach", {
 					end
 					if #uniq == 1 then
 						local first = uniq[1]
-						vim.cmd("edit " .. first.filename)
+						vim.cmd.edit(vim.fn.fnameescape(first.filename))
 						vim.api.nvim_win_set_cursor(0, { first.lnum, first.col })
 					elseif #uniq > 1 then
 						vim.fn.setqflist({}, " ", { title = "Definitions", items = uniq })
@@ -117,14 +138,14 @@ autocmd("LspAttach", {
 		vim.keymap.set("i", "<C-h>", function()
 			vim.lsp.buf.signature_help()
 		end, opts)
-		vim.keymap.set("n", "[d", function()
-			vim.diagnostic.goto_next()
-		end, opts)
 		vim.keymap.set("n", "]d", function()
-			vim.diagnostic.goto_prev()
+			vim.diagnostic.jump({ count = 1 })
 		end, opts)
-		vim.keymap.set("n", "<leader>h", function(_, bufnr)
-			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(), { bufnr })
+		vim.keymap.set("n", "[d", function()
+			vim.diagnostic.jump({ count = -1 })
+		end, opts)
+		vim.keymap.set("n", "<leader>h", function()
+			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = e.buf }), { bufnr = e.buf })
 		end, opts)
 	end,
 })

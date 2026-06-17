@@ -5,7 +5,13 @@ return {
     },
     config = function()
         require('flutter-tools').setup {
-            -- Customize flutter-tools settings
+            lsp = {
+                settings = {
+                    completeFunctionCalls = true,
+                    showTodos = true,
+                    updateImportsOnRename = true,
+                },
+            },
         }
     end,
 }
