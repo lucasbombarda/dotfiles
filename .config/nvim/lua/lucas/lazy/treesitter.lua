@@ -20,6 +20,7 @@ return {
 			"css",
 			"go",
 			"gitignore",
+            "gitcommit",
 			"htmldjango",
 			"html",
 			"sql",
