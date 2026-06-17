@@ -1,6 +1,6 @@
 return {
 	"mrcjkb/rustaceanvim",
-	version = "^6",
+	version = "^9",
 	lazy = false, -- rustaceanvim sets itself up, no need for lspconfig/mason-lspconfig
 	config = function()
 		vim.g.rustaceanvim = {
