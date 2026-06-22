@@ -45,10 +45,14 @@ return {
 				["pg_format"] = {
 					command = "pg_format",
 					args = {
-						"--keyword-case", "2",
-						"--type-case", "2",
-						"--function-case", "2",
-						"--spaces", "4",
+						"--keyword-case",
+						"2",
+						"--type-case",
+						"2",
+						"--function-case",
+						"2",
+						"--spaces",
+						"4",
 						"--no-space-function",
 						"-",
 					},

@@ -8,7 +8,8 @@ local LucasGroup = augroup("Lucas", {})
 local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup("HighlightYank", {})
 
-function R(name)
+-- Interactive dev helper: `:lua R('lucas.lazy.colors')` to hot-reload a module.
+function _G.R(name)
 	require("plenary.reload").reload_module(name)
 end
 
@@ -23,11 +24,16 @@ autocmd("TextYankPost", {
 	end,
 })
 
--- Automatically remove trailing whitespace on save
+-- Automatically remove trailing whitespace on save, preserving the cursor
+-- position and the last search pattern (keeppatterns + saved view).
 autocmd({ "BufWritePre" }, {
 	group = LucasGroup,
 	pattern = "*",
-	command = [[%s/\s\+$//e]],
+	callback = function()
+		local view = vim.fn.winsaveview()
+		vim.cmd([[keeppatterns %s/\s\+$//e]])
+		vim.fn.winrestview(view)
+	end,
 })
 
 autocmd({ "BufRead", "BufNewFile" }, {
@@ -51,8 +57,8 @@ autocmd({ "BufRead", "BufNewFile" }, {
 	group = LucasGroup,
 	pattern = { "*.dart" },
 	callback = function()
-		vim.opt.shiftwidth = 2
-		vim.opt.tabstop = 2
+		vim.opt_local.shiftwidth = 2
+		vim.opt_local.tabstop = 2
 	end,
 })
 
@@ -81,10 +87,26 @@ autocmd({ "BufWritePost" }, {
 			end
 		end
 
+		-- Run the project's type check after save and surface failures in the
+		-- quickfix list instead of discarding the output.
+		local lines = {}
 		vim.fn.jobstart({ "bun", "run", "check" }, {
 			stdout_buffered = true,
 			stderr_buffered = true,
-			detach = true,
+			on_stdout = function(_, data)
+				vim.list_extend(lines, data or {})
+			end,
+			on_stderr = function(_, data)
+				vim.list_extend(lines, data or {})
+			end,
+			on_exit = function(_, code)
+				if code == 0 then
+					return
+				end
+				vim.schedule(function()
+					vim.fn.setqflist({}, " ", { title = "bun run check", lines = lines })
+				end)
+			end,
 		})
 	end,
 })

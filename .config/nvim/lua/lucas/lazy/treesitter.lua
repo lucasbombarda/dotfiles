@@ -27,6 +27,7 @@ return {
 			"svelte",
 			"markdown",
 			"markdown_inline",
+            "toml",
 		})
 
 		vim.api.nvim_create_autocmd("FileType", {

@@ -154,3 +154,6 @@ export PATH="$PATH:$HOME/.rvm/bin"
 # Load flutter
 export PATH="$PATH:$HOME/etc/flutter/bin"
 
+# ESP32 espup environment variables
+alias get_esprs='. $HOME/export-esp.sh'
+get_esprs
