@@ -156,6 +156,8 @@ return {
 				["<C-n>"] = { "select_next", "fallback" },
 				["<CR>"] = { "accept", "fallback" },
 				["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
+				-- Manually re-trigger signature help if the automatic popup closes.
+				["<C-h>"] = { "show_signature", "hide_signature", "fallback" },
 			},
 			snippets = { preset = "luasnip" },
 			sources = {

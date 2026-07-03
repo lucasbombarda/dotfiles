@@ -62,6 +62,35 @@ autocmd({ "BufRead", "BufNewFile" }, {
 	end,
 })
 
+-- Rust convention is 100 columns, not the global 80.
+autocmd("FileType", {
+	group = LucasGroup,
+	pattern = "rust",
+	callback = function()
+		vim.opt_local.colorcolumn = "100"
+	end,
+})
+
+-- Jump to the last edit position when reopening a file, except for git
+-- commit messages where starting at the top makes more sense.
+autocmd("BufReadPost", {
+	group = LucasGroup,
+	pattern = "*",
+	callback = function()
+		local mark = vim.fn.line("'\"")
+		if mark > 1 and mark <= vim.fn.line("$") and not vim.fn.expand("%:p"):find(".git", 1, true) then
+			vim.cmd([[normal! g`"]])
+		end
+	end,
+})
+
+-- Backup/leftover files should never be edited in place.
+autocmd("BufRead", {
+	group = LucasGroup,
+	pattern = { "*.orig", "*.pacnew" },
+	command = "set readonly",
+})
+
 autocmd({ "BufWritePost" }, {
 	group = LucasGroup,
 	pattern = { "*.svelte", "+*.ts", "+*.js" },
@@ -156,9 +185,6 @@ autocmd("LspAttach", {
 		end, opts)
 		vim.keymap.set("n", "<leader>vrn", function()
 			vim.lsp.buf.rename()
-		end, opts)
-		vim.keymap.set("i", "<C-h>", function()
-			vim.lsp.buf.signature_help()
 		end, opts)
 		vim.keymap.set("n", "]d", function()
 			vim.diagnostic.jump({ count = 1 })

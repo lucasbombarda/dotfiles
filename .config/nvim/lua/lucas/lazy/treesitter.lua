@@ -20,14 +20,14 @@ return {
 			"css",
 			"go",
 			"gitignore",
-            "gitcommit",
+			"gitcommit",
 			"htmldjango",
 			"html",
 			"sql",
 			"svelte",
 			"markdown",
 			"markdown_inline",
-            "toml",
+			"toml",
 		})
 
 		vim.api.nvim_create_autocmd("FileType", {

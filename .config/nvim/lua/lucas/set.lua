@@ -31,3 +31,16 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
+
+-- Better diffs: ignore whitespace-only changes and use a smarter algorithm.
+vim.opt.diffopt:append("iwhite")
+vim.opt.diffopt:append("algorithm:histogram")
+vim.opt.diffopt:append("indent-heuristic")
+
+-- In cmdline completion (e.g. :e), list all matches and complete to the
+-- longest common match instead of cycling one at a time.
+vim.opt.wildmode = "list:longest"
+vim.opt.wildignore = ".hg,.svn,*~,*.png,*.jpg,*.gif,*.min.js,*.swp,*.o,vendor,dist,_site"
+
+-- Toggled with <leader>, to show tabs/trailing whitespace/etc.
+vim.opt.listchars = "tab:^ ,nbsp:¬,extends:»,precedes:«,trail:•"
