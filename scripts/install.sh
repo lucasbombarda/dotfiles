@@ -6,9 +6,9 @@ TEMP_DIR="$(mktemp -d)"
 echo "Created temporary directory: $TEMP_DIR"
 echo "All to-be-deleted files will be moved here first."
 
-if command -v dnf &> /dev/null; then
+if command -v dnf &>/dev/null; then
     PM="dnf"
-elif command -v apt-get &> /dev/null; then
+elif command -v apt-get &>/dev/null; then
     PM="apt"
 else
     echo "Unsupported package manager." >&2
@@ -47,7 +47,7 @@ sys_update
 if [ "$PM" = "dnf" ]; then
     sys_install git curl dkms perl wget make mariadb-devel openssl-devel \
         zlib-devel bzip2-devel readline-devel sqlite-devel llvm ncurses-devel xz-devel libffi-devel
-} else
+else
     sys_install git curl build-essential dkms perl wget make default-libmysqlclient-dev \
         libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm \
         libncurses5-dev libncursesw5-dev xz-utils libffi-dev liblzma-dev
@@ -163,9 +163,9 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 # NVM
 ######################################
 export NVM_DIR="$HOME/.nvm" && (
-  git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
-  cd "$NVM_DIR"
-  git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+    git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
+    cd "$NVM_DIR"
+    git checkout $(git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1))
 ) && \. "$NVM_DIR/nvm.sh"
 
 ######################################
