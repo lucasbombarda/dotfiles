@@ -23,12 +23,12 @@ return {
 			desc = "Trouble: Fechar aberto ou abrir qflist",
 		},
 		{
-			"gd",
+			"gD",
 			"<cmd>Trouble lsp_implementations auto_jump=true<cr>",
 			desc = "Trouble: Goto implementation",
 		},
 		{
-			"gD",
+			"gd",
 			"<cmd>Trouble lsp_definitions auto_jump=true<cr>",
 			desc = "Trouble: Goto definition",
 		},
