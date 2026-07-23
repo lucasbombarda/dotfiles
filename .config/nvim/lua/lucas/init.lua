@@ -53,15 +53,6 @@ autocmd({ "BufRead", "BufNewFile" }, {
 	end,
 })
 
-autocmd({ "BufRead", "BufNewFile" }, {
-	group = LucasGroup,
-	pattern = { "*.dart" },
-	callback = function()
-		vim.opt_local.shiftwidth = 2
-		vim.opt_local.tabstop = 2
-	end,
-})
-
 -- Rust convention is 100 columns, not the global 80.
 autocmd("FileType", {
 	group = LucasGroup,
