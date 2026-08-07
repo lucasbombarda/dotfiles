@@ -34,7 +34,7 @@ return {
 			},
 			formatters = {
 				["clang-format"] = {
-					prepend_args = { "-style=file", "-fallback-style=LLVM" },
+					prepend_args = { "-style={BasedOnStyle: LLVM, IndentWidth: 4}" },
 				},
 				["djlint"] = {
 					prepend_args = { "$FILENAME", "--reformat", "--format-css", "--format-js", "--quiet" },
