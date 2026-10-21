@@ -150,3 +150,6 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 # Load flutter
 export PATH="$PATH:$HOME/etc/flutter/bin"
+
+# opencode
+export PATH=/home/z/.opencode/bin:$PATH
