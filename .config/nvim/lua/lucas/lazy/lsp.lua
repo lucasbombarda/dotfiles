@@ -52,7 +52,6 @@ return {
 			ensure_installed = {
 				"stylua",
 				"prettier",
-				"djlint",
 				"pgformatter",
 				"clang-format",
 				"shfmt",

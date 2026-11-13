@@ -32,15 +32,12 @@ return {
 					"ruff_format",
 					"ruff_organize_imports",
 				},
-				htmldjango = { "djlint" },
+				htmldjango = { "djangofmt" },
 				sql = { "pg_format" },
 			},
 			formatters = {
 				["clang-format"] = {
 					prepend_args = { "-style={BasedOnStyle: LLVM, IndentWidth: 4}" },
-				},
-				["djlint"] = {
-					prepend_args = { "--format-css", "--format-js", "--quiet" },
 				},
 				["pg_format"] = {
 					command = "pg_format",

@@ -25,6 +25,7 @@ echo "Updating Rust"
 
 echo "Updating uv"
 "$HOME/.local/bin/uv" self update
+"$HOME/.local/bin/uv" tool upgrade --all
 
 echo "Updating Bun"
 "$HOME/.bun/bin/bun" upgrade --stable
