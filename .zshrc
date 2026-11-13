@@ -130,9 +130,6 @@ eval "$(zoxide init --cmd cd zsh)"
 # Load Nim
 export PATH="$HOME/.nimble/bin:$PATH"
 
-# Go compiler
-export PATH=$PATH:/usr/local/go/bin
-
 # Android SDK
 export JAVA_HOME="$HOME/.sdkman/candidates/java/current"
 export PATH="$JAVA_HOME/bin:$PATH"
