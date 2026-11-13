@@ -11,7 +11,7 @@ return {
 				c = { "clang-format" },
 				cpp = { "clang-format" },
 				lua = { "stylua" },
-				go = { "gofmt" },
+				go = { "goimports" },
 				javascript = { "prettier" },
 				typescript = { "prettier" },
 				-- svelteserver bundles prettier-plugin-svelte; ts_ls is also attached to svelte buffers

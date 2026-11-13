@@ -58,6 +58,7 @@ return {
 				"shfmt",
 				"taplo",
 				"ruff",
+				"goimports",
 				"rust-analyzer",
 			},
 		})
