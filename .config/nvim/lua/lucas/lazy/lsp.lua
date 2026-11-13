@@ -57,6 +57,7 @@ return {
 				"clang-format",
 				"shfmt",
 				"taplo",
+				"ruff",
 				"rust-analyzer",
 			},
 		})

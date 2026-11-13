@@ -14,8 +14,11 @@ return {
 				go = { "gofmt" },
 				javascript = { "prettier" },
 				typescript = { "prettier" },
-				svelte = { "prettier" },
+				-- svelteserver bundles prettier-plugin-svelte; ts_ls is also attached to svelte buffers
+				svelte = { lsp_format = "prefer", name = "svelte" },
+				html = { "prettier" },
 				css = { "prettier" },
+				scss = { "prettier" },
 				json = { "prettier" },
 				jsonc = { "prettier" },
 				yaml = { "prettier" },
@@ -37,10 +40,7 @@ return {
 					prepend_args = { "-style={BasedOnStyle: LLVM, IndentWidth: 4}" },
 				},
 				["djlint"] = {
-					prepend_args = { "$FILENAME", "--reformat", "--format-css", "--format-js", "--quiet" },
-				},
-				["prettier"] = {
-					prepend_args = { "$FILENAME" },
+					prepend_args = { "--format-css", "--format-js", "--quiet" },
 				},
 				["pg_format"] = {
 					command = "pg_format",
