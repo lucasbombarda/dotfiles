@@ -145,11 +145,10 @@ sudo mv lua-5.1.5 "$TEMP_DIR" 2>/dev/null || true
 # Go
 ######################################
 echo "Installing Go"
-if [ "$PM" = "dnf" ]; then
-    sys_install golang
-else
-    sys_install golang-go
-fi
+GO_VERSION="$(curl -fsSL 'https://go.dev/VERSION?m=text' | head -n1)"
+curl -fsSL "https://go.dev/dl/${GO_VERSION}.linux-amd64.tar.gz" -o "$TEMP_DIR/go.tar.gz"
+sudo rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf "$TEMP_DIR/go.tar.gz"
 
 ######################################
 # UV (Python)

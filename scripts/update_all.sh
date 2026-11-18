@@ -14,11 +14,10 @@ else
 fi
 
 echo "Updating Go"
-if [ "$PM" = "dnf" ]; then
-    sudo dnf upgrade -y golang
-else
-    sudo apt update && sudo apt install -y --only-upgrade golang-go
-fi
+GO_VERSION="$(curl -fsSL 'https://go.dev/VERSION?m=text' | head -n1)"
+curl -fsSL "https://go.dev/dl/${GO_VERSION}.linux-amd64.tar.gz" -o "$TEMP_DIR/go.tar.gz"
+sudo rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf "$TEMP_DIR/go.tar.gz"
 
 echo "Updating Rust"
 "$HOME/.cargo/bin/rustup" update

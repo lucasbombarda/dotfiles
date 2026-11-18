@@ -127,6 +127,9 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="$HOME/.local/bin:$PATH"
 eval "$(zoxide init --cmd cd zsh)"
 
+# Load Go
+export PATH="$PATH:/usr/local/go/bin:$HOME/go/bin"
+
 # Load Nim
 export PATH="$HOME/.nimble/bin:$PATH"
 
